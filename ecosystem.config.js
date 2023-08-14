@@ -6,6 +6,7 @@ module.exports = {
       watch: true,
       intances: "max",
       autorestart: true,
+      exec_mode: "cluster",
       env: {
         NODE_ENV: "development",
       },
