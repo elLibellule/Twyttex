@@ -1,0 +1,57 @@
+.content {
+  max-width: 1000px;
+}
+
+.profile-container { 
+  width: 30%;
+  max-width: 300px;
+}
+
+.navbar {
+  border-bottom:1px solid rgba(0, 0, 0, 0.25);
+}
+
+.img-fluid {
+  max-height: 100px;
+}
+
+body {
+  background-color:#f8f9fa;
+}
+
+.tweet-element {
+  border-radius: 0px;
+  font-size:14px;
+  border:0px;
+  border-top:1px solid #ddd;
+}
+
+.tweet-element:first-child {
+  border-top:0px;
+}
+
+.div-avatar {
+   position: relative;
+   width: max-content
+  }
+
+.div-avatar img {
+   display: block;
+  }
+.div-avatar .fa-file-pen { 
+  position: absolute; 
+  right: 11px;
+  }
+
+.btn-tweet {
+  border-radius: 30px;
+}
+
+.b {
+  border: 1px solid red;
+}
+
+.b1 {
+  border: 1px solid gray;
+
+}

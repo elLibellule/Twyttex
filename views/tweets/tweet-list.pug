@@ -1,0 +1,8 @@
+if tweets 
+    each tweet in tweets 
+        div(class="card tweet-element")   
+            div(class="card-body")
+                h4(class="card-text")= tweet.content
+                button(class="btn btn-danger mt-2 text-end" style="float: right" tweetid=tweet._id) delete
+                button(class="btn btn-secondary mt-2 text-end" + tweet._id style="float: right" tweetid=tweet._id) update 
+
