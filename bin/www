@@ -3,6 +3,7 @@ const https = require("https");
 const app = require("../app");
 const fs = require("fs");
 const path = require("path");
+const env = require(`../environment/${process.env.NODE_ENV}`);
 
 http
   .createServer((req, res) => {
@@ -15,8 +16,8 @@ http
 
 const server = https.createServer(
   {
-    key: fs.readFileSync(path.join(__dirname, "../ssl/key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "../ssl/cert.pem")),
+    key: fs.readFileSync(env.key),
+    cert: fs.readFileSync(env.cert),
   },
   app
 );
