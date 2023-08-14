@@ -9,10 +9,14 @@ http
   .createServer((req, res) => {
     console.log("http server");
     console.log(`https://${req.headers.host}${req.url}`);
-    res.writeHead("301", { location: `https://${req.headers.host}${req.url}` });
+    res.writeHead("301", {
+      location: `https://${req.headers.host.split(":")[0]}:${env.portHttps}${
+        req.url
+      }`,
+    });
     res.end();
   })
-  .listen(80);
+  .listen(env.portHttp);
 
 const server = https.createServer(
   {
@@ -22,4 +26,4 @@ const server = https.createServer(
   app
 );
 
-server.listen(443);
+server.listen(env.portHttps);
