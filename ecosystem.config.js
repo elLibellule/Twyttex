@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "twyttex",
       script: "./bin/www",
-      watch: true,
+      watch: false,
       intances: "max",
       autorestart: true,
       exec_mode: "cluster",
