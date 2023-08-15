@@ -24,3 +24,11 @@ exports.updateTweet = (tweetId, tweet) => {
     { runValidators: true }
   );
 };
+
+exports.getCurrentUserTweetsWithFollowing = (user) => {
+  return Tweet.find({ author: { $in: [...user.following, user._id] } }).populate('author');
+};
+
+exports.getUserTweetsFromUsername = (authorId) => {
+  return Tweet.find({ author: authorId }).populate('author');
+};

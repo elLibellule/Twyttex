@@ -4,15 +4,17 @@ const {
   createTweet,
   deleteTweet,
   updateTweet,
+  getCurrentUserTweetsWithFollowing,
 } = require("../queries/tweet.queries");
 
 exports.tweetList = async (req, res, next) => {
   try {
-    const tweets = await getTweets();
+    const tweets = await getCurrentUserTweetsWithFollowing(req.user);
     res.render("tweets/tweet", {
       tweets,
       isAuthenticated: req.isAuthenticated(),
       currentUser: req.user,
+      user: req.user,
     });
   } catch (err) {
     next(err);

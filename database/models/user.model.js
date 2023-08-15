@@ -10,6 +10,7 @@ const userSchema = schema({
     googleId: { type: String },
   },
   avatar: { type: String, default: "/images/default-profile.svg" },
+  following: { type: [schema.Types.ObjectId], ref: "user" },
 });
 
 userSchema.statics.hashPassword = async (password) => {

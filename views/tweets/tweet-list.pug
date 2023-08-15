@@ -1,8 +1,12 @@
-if tweets 
-    each tweet in tweets 
-        div(class="card tweet-element")   
-            div(class="card-body")
-                h4(class="card-text")= tweet.content
-                button(class="btn btn-danger mt-2 text-end" style="float: right" tweetid=tweet._id) delete
-                button(class="btn btn-secondary mt-2 text-end" + tweet._id style="float: right" tweetid=tweet._id) update 
-
+if tweets
+    each tweet in tweets
+        div(class="card tweet-element")
+            div(class="card-body d-flex flex-column")
+                div(class="d-flex flex-row align-items-center pb-2")
+                    img(width="80" height="80" class="pe-3" src=tweet.author.avatar)
+                    span(class="flex-fill")= tweet.author.username
+                    //- if editable && tweet.author._id.toString() === currentUser._id.toString()
+                    div(class="d-flex flex-row justify-content-center")
+                        a(class="fa-solid fa-edit pe-2 text-success" href="/tweets/edit/" + tweet._id)
+                        i(class="fa-solid fa-minus-circle text-danger pointer-cursor" tweetid=tweet._id)
+                div= tweet.content

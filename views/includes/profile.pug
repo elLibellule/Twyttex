@@ -3,10 +3,10 @@ div(class="profile-container bg-white me-3 d-flex flex-column")
     form(class="d-flex flex-row justify-content-center align-items-center form-container" action="/users/update/image" method="post" enctype="multipart/form-data")
         div(class="div-avatar")
             input(type="file" name="avatar" class="d-none" id="input-avatar")
-            img(src=currentUser.avatar class="img-fluid" id="profile-image")
+            img(src=user.avatar class="img-fluid" id="profile-image")
             i(class="fa-solid fa-file-pen text-primary")
     div(class="d-flex flex-row justify-content-center align-items-center my-3")
-        p= `${ currentUser.username } (${ currentUser.local.email })`
+        p= `${ user.username } (${ user.local.email })`
     div(class="text-center d-flex flex-row justify-content-center align-items-center my-3")
         div(class="flex-fill")
             p

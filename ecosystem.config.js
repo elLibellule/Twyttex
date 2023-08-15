@@ -5,7 +5,7 @@ module.exports = {
       script: "./bin/www",
       watch: false,
       intances: "max",
-      autorestart: true,
+      autorestart: false,
       exec_mode: "cluster",
       env: {
         NODE_ENV: "development",
