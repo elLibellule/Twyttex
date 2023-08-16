@@ -26,6 +26,7 @@ exports.tweetNew = (req, res, next) => {
   res.render("tweets/tweet-form", {
     tweet: {},
     isAuthenticated: req.isAuthenticated(),
+    currentUser: req.user,
   });
 };
 
@@ -38,7 +39,11 @@ exports.tweetCreate = async (req, res, next) => {
     const errors = Object.keys(err.errors).map(
       (key) => err.errors[key].message
     );
-    res.render("tweets/tweet-form", { errors });
+    res.render("tweets/tweet-form", {
+      errors,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+    });
   }
 };
 
