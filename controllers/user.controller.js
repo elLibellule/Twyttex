@@ -34,7 +34,6 @@ exports.userProfile = async (req, res, next) => {
   try {
     const username = req.params.username;
     const user = await getUserByUsername(username);
-    console.log(user);
     const tweets = await getUserTweetsFromAuthorId(user._id);
     res.render("tweets/tweet", {
       tweets,
