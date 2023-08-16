@@ -55,11 +55,15 @@ exports.searchUsersByUsername = (search) => {
 };
 
 exports.addUserIdToCurrentUserFollowing = (currentUser, userId) => {
-  return User.updateOne({_id: currentUser._id}, { $push: { following: userId } });
-}
+  return User.updateOne(
+    { _id: currentUser._id },
+    { $push: { following: userId } }
+  );
+};
 
 exports.removeUserIdToCurrentUserFollowing = (currentUser, userId) => {
-  currentUser.following = currentUser.following.filter( objId => objId.toString() !== userId );
+  currentUser.following = currentUser.following.filter(
+    (objId) => objId.toString() !== userId
+  );
   return currentUser.save();
-}
-
+};
