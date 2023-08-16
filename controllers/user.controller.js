@@ -1,4 +1,12 @@
-const { createUser } = require("../queries/user.queries");
+const {
+  createUser,
+  getUserByUsername,
+  searchUsersByUsername,
+  findUserById,
+  addUserIdToCurrentUserFollowing,
+  removeUserIdToCurrentUserFollowing,
+} = require("../queries/user.queries");
+const { getUserTweetsFromAuthorId } = require("../queries/tweet.queries");
 const path = require("path");
 const multer = require("multer");
 const upload = multer({
@@ -11,6 +19,34 @@ const upload = multer({
     },
   }),
 });
+
+exports.userList = async (req, res, next) => {
+  try {
+    const search = req.query.search;
+    const users = await searchUsersByUsername(search);
+    res.render("includes/search-menu", { users });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.userProfile = async (req, res, next) => {
+  try {
+    const username = req.params.username;
+    const user = await getUserByUsername(username);
+    console.log(user);
+    const tweets = await getUserTweetsFromAuthorId(user._id);
+    res.render("tweets/tweet", {
+      tweets,
+      isAuthenticated: req.isAuthenticated(),
+      currentUser: req.user,
+      user,
+      editable: false,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.userSignUp = async (req, res, next) => {
   res.render("user/user-form", {
@@ -52,3 +88,29 @@ exports.uploadProfileImage = [
     }
   },
 ];
+
+exports.followUser = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const [, user] = await Promise.all([
+      addUserIdToCurrentUserFollowing(req.user, userId),
+      findUserById(userId),
+    ]);
+    res.redirect(`/users/${user.username}`);
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.unfollowUser = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const [, user] = await Promise.all([
+      removeUserIdToCurrentUserFollowing(req.user, userId),
+      findUserById(userId),
+    ]);
+    res.redirect(`/users/${user.username}`);
+  } catch (e) {
+    next(e);
+  }
+};

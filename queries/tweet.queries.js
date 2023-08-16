@@ -26,9 +26,11 @@ exports.updateTweet = (tweetId, tweet) => {
 };
 
 exports.getCurrentUserTweetsWithFollowing = (user) => {
-  return Tweet.find({ author: { $in: [...user.following, user._id] } }).populate('author');
+  return Tweet.find({
+    author: { $in: [...user.following, user._id] },
+  }).populate("author");
 };
 
-exports.getUserTweetsFromUsername = (authorId) => {
-  return Tweet.find({ author: authorId }).populate('author');
+exports.getUserTweetsFromAuthorId = (authorId) => {
+  return Tweet.find({ author: authorId }).populate("author");
 };
