@@ -54,7 +54,7 @@ exports.tweetDelete = async (req, res, next) => {
     const tweets = await getCurrentUserTweetsWithFollowing(req.user);
     res.render("tweets/tweet-list", {
       tweets,
-      currentUser: req.ser,
+      currentUser: req.user,
       editable: true,
     });
   } catch (err) {
