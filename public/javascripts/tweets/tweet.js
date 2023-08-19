@@ -7,15 +7,17 @@ const deleteTweet = () => {
   const elements = document.querySelectorAll(".fa-minus-circle");
   const tweetContainer = document.querySelector("#tweet-list-container");
   elements.forEach((element) => {
-    element.addEventListener("click", async (event) => {
+    element.addEventListener("click", (event) => {
       const tweetId = event.target.getAttribute("tweetid");
-      try {
-        const response = await axios.delete(`/tweets/${tweetId}`);
-        tweetContainer.innerHTML = response.data;
-        deleteTweet();
-      } catch (err) {
-        console.log(err);
-      }
+      axios
+        .delete(`/tweets/${tweetId}`)
+        .then((response) => {
+          tweetContainer.innerHTML = response.data;
+          deleteTweet();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   });
 };
