@@ -6,7 +6,11 @@ const userSchema = schema({
   username: { type: String },
   local: {
     email: { type: String, require: true, unique: true },
+    emailVerified: { type: Boolean, default: false },
+    emailToken: { type: String },
     password: { type: String },
+    passwordToken: { type: String },
+    passwordTokenExpiration: { type: Date },
     googleId: { type: String },
   },
   avatar: { type: String, default: "/images/default-profile.svg" },

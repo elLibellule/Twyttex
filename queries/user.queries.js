@@ -1,5 +1,6 @@
-const Tweet = require("../database/models/tweet.model");
+const passport = require("passport");
 const User = require("../database/models/user.model");
+const uuid = require("uuid");
 
 exports.createUser = async (user, methodUsed) => {
   try {
@@ -10,6 +11,7 @@ exports.createUser = async (user, methodUsed) => {
         local: {
           email: user.email,
           password: hashedPassword,
+          emailToken: uuid.v4(),
         },
       });
       return newUser.save();
@@ -66,4 +68,13 @@ exports.removeUserIdToCurrentUserFollowing = (currentUser, userId) => {
     (objId) => objId.toString() !== userId
   );
   return currentUser.save();
+};
+
+exports.updatePassword = async (user, password) => {
+  if (user && password) {
+    user.local.password = await User.hashPassword(password);
+    user.local.passwordToken = null;
+    user.local.passwordTokenExpiration = null;
+    await user.save();
+  }
 };
