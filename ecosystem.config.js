@@ -4,8 +4,8 @@ module.exports = {
       name: "twyttex",
       script: "./bin/www",
       watch: false,
-      intances: "max",
-      autorestart: false,
+      instances: "max",
+      autorestart: true,
       exec_mode: "cluster",
       env: {
         NODE_ENV: "development",
