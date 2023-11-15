@@ -82,7 +82,7 @@ exports.userCreate = async (req, res, next) => {
   } catch (err) {
     res.render("user/user-form", {
       error: [err.message],
-      isAthenticated: req.isAthenticated(),
+      isAthenticated: req.isAuthenticated(),
       currentUser: req.user,
     });
   }
