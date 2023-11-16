@@ -4,6 +4,7 @@ const sparkPostTransport = require("nodemailer-sparkpost-transport");
 const path = require("path");
 const pug = require("pug");
 
+// email class helper 
 class Email {
   constructor() {
     this.from = "Kinpel-projects <no-reply@app.kinpel.com>";
